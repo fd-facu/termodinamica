@@ -1,4 +1,26 @@
 # termodinamica
-Aplicacion para resolver problemas de termodinamica / App that resolves thermodynamics problems.
+(Español)
 
-tu vieja
+Aplicacion para resolver problemas de termodinamica.
+
+Caracteristicas futuras:
+
+. Implementar validaciones (ej: que no permita realizar el grafico si no se indico el numero de moles)
+. Integrar el grafico en la ventana principal de la aplicacion.
+
+
+Errores conocidos:
+
+. Botones desaparecen al presionar "graficar" repetidas veces en el menu de grafico.
+
+(English)
+
+App that resolves thermodynamics problems.
+
+Roadmap:
+
+.Implement some validations. 
+.Put the Plot window inside the app window.
+
+
+Know Issues
