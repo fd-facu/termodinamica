@@ -7,6 +7,7 @@ Caracteristicas futuras:
 
 . Implementar validaciones (ej: que no permita realizar el grafico si no se indico el numero de moles)
 . Integrar el grafico en la ventana principal de la aplicacion.
+. Empaquetar la aplicaciones para diferentes sistemas operativos
 
 
 Errores conocidos:
