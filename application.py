@@ -1,5 +1,4 @@
-# Importando librerias de python
-# Presion final para adiabatica ejemplo: 2.64
+# Importing python libreries
 import sys
 print("Iniciando aplicacion...\n")
 from matplotlib import pyplot as plt
@@ -13,6 +12,7 @@ else:
 # Importanto archivos propios.
 import calculos as calc
 import grafico_presion_volumen as graf
+import tkinter.messagebox as msj
 
 
 # Cada pagina esta representada en una clase
@@ -39,11 +39,11 @@ class Aplicacion(tk.Tk):
 
         self.help = tk.Menu(self.menu)
         self.help.add_command(label='Ayuda', command=self.create_help_window)
-        self.help.add_command(label="Acerca de")
+        self.help.add_command(label="Acerca de", command=self.create_about_popup)
         self.menu.add_cascade(label="Ayuda", menu=self.help)
 
         self.frames = {}
-        for F in (MenuPrincipal, MenuCalculos, MenuConversiones, CalculoCalor, CalculoCalorLatente, ConversionCelcius, CalculoTemperatura,
+        for F in (MenuPrincipal, MenuCalculos, MenuConversiones, CalculoCalor, CalculoCalorLatente, CalculoTemperatura,
                 CalculoTrabajoPresionConstante, CalculoTrabajoTemperaturaConstante, Grafico):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
@@ -55,7 +55,7 @@ class Aplicacion(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
 
         self.title("Aplicacion Termodinamica")
-        self.geometry("800x450")
+        self.geometry("640x360")
         self.show_frame("MenuPrincipal")
 
     def show_frame(self, page_name):
@@ -65,12 +65,28 @@ class Aplicacion(tk.Tk):
 
     def create_help_window(self):
 
-        texto = "Primer principio de termodinamica: /|U = Q + W \n\n Constantes Importantes: \n\n Conversion de atm l a J: 1 atm*L = 101.3J \n Constante universal de los gases = 0.082 atm * L | 8.314J \n Calor latente de fusion agua: 333,5 kJ/kg \n Calor latenete de valorizacion agua: 2257 kJ/kg \n Ecuacion de equilibrio: PV=nRT \n Trabajo realizado en una compresion isoterma: W= nRT Ln(vi/vf) \n Capacidad calorifica del gas a volumen constante(gas ideal monoatomico): Cv = 3/2 nR\n Capacidad calorifica del gas a volumen constante(gas ideal diatomico): Cv = 5/2 nR \n Capacidad calorifica del gas a presion constante: Cp = Cv + nR"
+        texto = "Constantes Importantes: \n\n Conversion de atm l a J: 1 atm*L = 101.3J \n Constante universal de los gases = 0.082 atm * L | 8.314J \n Calor latente de fusion agua: 333,5 kJ/kg \n Calor latenete de valorizacion agua: 2257 kJ/kg \n Ecuacion de equilibrio: PV=nRT \n Trabajo realizado en una compresion isoterma: W= nRT Ln(vi/vf) \n Capacidad calorifica del gas a volumen constante(gas ideal monoatomico): Cv = 3/2 nR\n Capacidad calorifica del gas a volumen constante(gas ideal diatomico): Cv = 5/2 nR \n Capacidad calorifica del gas a presion constante: Cp = Cv + nR"
 
         t = tk.Toplevel(self)
-        t.wm_title("Titulo")
+        # Keep the focus on the window.
+        t.grab_set()
+        t.wm_title("Ayoda")
         l = tk.Label(t, text=texto)
         l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
+
+    def create_about_popup(self):
+        texto = "\nAplicacion termodinamica version 0.3 \nCreado por Facundo peña \n "
+
+        t = tk.Toplevel(self)
+        # Keep the focus on the window.
+        t.grab_set()
+        t.wm_title("Ayuda")
+        l = tk.Label(t, text=texto )
+        l.pack(side="top", padx=20, anchor='w')
+        tx = tk.Text(t)
+        tx.insert(0.1, texto)
+        tx.config(state='disabled')
+        tx.pack(side="bottom", padx=20, anchor='w')
 
 
 class MenuPrincipal(tk.Frame):
@@ -156,9 +172,14 @@ class CalculoCalor(tk.Frame):
         return_button.pack()
 
     def obtener_calor(self, masa, calor_especifico, temperatura):
+        try:
+            resultado = calc.obtener_calor(float(masa), float(calor_especifico), float(temperatura))
+            print("resultado: " + str(resultado))
+            self.texto_resultado["text"] = "Q total: " + str(resultado)+" kJ"
 
-        resultado = calc.obtener_calor(float(masa), float(calor_especifico), float(temperatura))
-        self.texto_resultado["text"] = "Q total: " + str(resultado)+" kJ"
+        except ValueError:
+            print("Uno de los valores ingresados no es valido")
+            self.texto_resultado["text"] = "Uno de los valores ingresados no es valido"
 
 
 class CalculoCalorLatente(tk.Frame):
@@ -195,37 +216,6 @@ class CalculoCalorLatente(tk.Frame):
         self.texto_resultado["text"] = "Q total: " + str(resultado)+" kJ"
 
 
-class ConversionCelcius(tk.Frame):
-
-        def __init__(self, parent, controller):
-            tk.Frame.__init__(self, parent)
-            self.controller = controller
-
-            label = tk.Label(self, text="Complete los datos requeridos", font=controller.title_font)
-            label.pack(side="top", fill="x", pady=10)
-
-            texto_celcius = tk.Label(self, text="Temperatura(en Celcius)")
-            entrada_celcius = tk.Entry(self)
-
-            button1 = tk.Button(self, text="Calcular",
-                                command=lambda: self.obtener_temperatura_kelvin(entrada_celcius.get(), ))
-
-            self.texto_resultado = tk.Label(self, text="", fg="blue")
-            return_button = tk.Button(self, text="Volver", command=lambda: controller.show_frame("MenuPrincipal"))
-
-            texto_celcius.pack()
-            entrada_celcius.pack()
-
-            button1.pack()
-            self.texto_resultado.pack()
-            return_button.pack()
-
-        def obtener_temperatura_kelvin(self, temp_celcius):
-
-            resultado = calc.convertir_celcius_a_kelvin(float(temp_celcius))
-            self.texto_resultado["text"] = "Temperatura en kelvin: " + str(resultado)+" K"
-
-
 class CalculoTemperatura(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -260,8 +250,14 @@ class CalculoTemperatura(tk.Frame):
         return_button.pack()
 
     def obtener_temperatura(self, nmoles, presion, volumen):
-        resultado = calc.obtener_temperatura_gas_ideal(float(nmoles), float(presion), float(volumen))
-        self.texto_resultado["text"] = "Temperatura: " + str(resultado) + "kJ"
+        try:
+            resultado = calc.obtener_temperatura_gas_ideal(float(nmoles), float(presion), float(volumen))
+            print("resultado: " + str(resultado))
+            self.texto_resultado["text"] = "Temperatura: " + str(resultado) + "kJ"
+
+        except ValueError:
+            print("Uno de los valores ingresados no es valido")
+            self.texto_resultado["text"] = "Uno de los valores ingresados no es valido"
 
 
 class CalculoTrabajoPresionConstante(tk.Frame):
@@ -358,13 +354,11 @@ class MenuConversiones(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="Menu conversiones", font=controller.title_font)
+        label = tk.Label(self, text="This is page 2", font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
-
-        button0 = tk.Button(self, text="Conversion de Celcius a Kelvin: ", command=lambda: controller.show_frame("ConversionCelcius"))
         button = tk.Button(self, text="Go to the start page",
                            command=lambda: controller.show_frame("MenuPrincipal"))
-        button0.pack()
+
         button.pack()
 
 
@@ -382,10 +376,10 @@ class Grafico(tk.Frame):
 
         titulo1 = tk.Label(self, text="Agregar PUNTO(MINIMO 2)")
 
-        titulo_presion = tk.Label(self, text="Presion(En ATM)")
-        titulo_volumen = tk.Label(self, text="Volumen(En Litros)")
-        titulo_presion2 = tk.Label(self, text="Presion(En ATM)")
-        titulo_volumen2 = tk.Label(self, text="Volumen(En Litros)")
+        titulo_presion = tk.Label(self, text="Presion")
+        titulo_volumen = tk.Label(self, text="Volumen")
+        titulo_presion2 = tk.Label(self, text="Presion")
+        titulo_volumen2 = tk.Label(self, text="Volumen")
 
         entrada_presion = tk.Entry(self)
         entrada_volumen = tk.Entry(self)
@@ -396,12 +390,12 @@ class Grafico(tk.Frame):
         titulo2 = tk.Label(self, text="Agregar PUNTO(MINIMO 2)")
         entrada_presion2 = tk.Entry(self)
         entrada_volumen2 = tk.Entry(self)
-        var_1 = tk.IntVar()
-        var_1.set(0)
-        var_1_int = var_1.get()
-        self.entry_list = [[titulo1, entrada_presion, entrada_volumen, var_0_int], [titulo2, entrada_presion2, entrada_volumen2, var_1_int]]
-        self.answer_list = [var_0, var_1]
-        print("Valor del entry list: " + str(self.entry_list[1][2]))
+        self.var_1 = tk.IntVar()
+        self.var_1.set(0)
+        var_1_int = self.var_1.get()
+        self.entry_list = [[entrada_presion, entrada_volumen, var_0_int], [entrada_presion2, entrada_volumen2, var_1_int]]
+        self.answer_list = [var_0, self.var_1]
+        print("valor del entry list: " + str(self.entry_list[1][2]))
 
         radio_isoterma = tk.Radiobutton(self, text="Isoterma", command= lambda : self.change(1, 1))
         radio_noisoterma = tk.Radiobutton(self, text="Volumen/Presion constante", command= lambda : self.change(1, 0))
@@ -434,25 +428,25 @@ class Grafico(tk.Frame):
         radio_adiabatica.grid(row=7, column=4)
 
     def change(self, index, value):
-        self.entry_list[index][3] = value
+        self.entry_list[index][2] = value
         print("Lista de puntos")
         for entry in self.entry_list:
-            print("("+str(type(entry[1]))+" , " + str(type(entry[2])) + " , " + str(type(entry[3])))
-            print(str(entry[1].get()) + str(entry[2].get()) + str(entry[3]))
+            print("Presion: " + str(entry[0].get()) + "  Volumen: " + str(entry[1].get()) + "  Tipo de proceso: " +
+                    str(entry[2]))
 
     def clone(self):
         self.point_index = self.point_index + 1
         instance_titulo = tk.Label(self, text="Agregar PUNTO")
 
-        instance_titulo_presion = tk.Label(self, text="Presion(En ATM)")
-        instance_titulo_volumen = tk.Label(self, text="Volumen(En Litros)")
+        instance_titulo_presion = tk.Label(self, text="Presion")
+        instance_titulo_volumen = tk.Label(self, text="Volumen")
 
         instance_presion = tk.Entry(self)
         instance_volumen = tk.Entry(self)
 
         instance_radio_isoterma = tk.Radiobutton(self, text="Isoterma",
                                                  command=lambda: self.change(self.point_index, 1))
-        instance_radio_noisoterma = tk.Radiobutton(self, text="Presion / volumen constante",
+        instance_radio_noisoterma = tk.Radiobutton(self, text="No isoterma",
                                                    command=lambda: self.change(self.point_index, 0))
         instance_radio_adiabatica = tk.Radiobutton(self, text="Adiabatica",
                                                    command=lambda: self.change(self.point_index, 2))
@@ -499,31 +493,31 @@ class Grafico(tk.Frame):
         resultados = []
 
         for point in range(0, len(self.entry_list)):
-            print("Es isotermico: " + str(self.entry_list[point][3]))
+            print("Es isotermico: " + str(self.entry_list[point][2]) )
 
-            if self.entry_list[point][3] is 1:
+            if self.entry_list[point][2] is 1:
 
-                print("Es un proceso isotermico")
+                print("Es un proceso isotermico.")
 
-                temperatura = calc.obtener_temperatura_gas_ideal(float(self.entry_list[point][1].get()),
-                        float(self.entry_list[point][2].get()), float(self.entrada_moles.get()))
+                temperatura = calc.obtener_temperatura_gas_ideal(float(self.entry_list[point][0].get()),
+                        float(self.entry_list[point][1].get()), float(self.entrada_moles.get()))
                 print("Temperatura durante el proceso isotermico: ", str(temperatura))
 
-                puntos = graf.generar_puntos_isoterma(float(self.entrada_moles.get()), float(self.entry_list[point][2].get()),
-                                                      float(self.entry_list[point-1][2].get()), float(self.entry_list[point][1].get()),
-                                                      float(self.entry_list[point-1][1].get()), 25, temperatura)
+                puntos = graf.generar_puntos_isoterma(float(self.entrada_moles.get()), float(self.entry_list[point][1].get()),
+                                                      float(self.entry_list[point-1][1].get()), float(self.entry_list[point][0].get()),
+                                                      float(self.entry_list[point-1][0].get()), 25, temperatura)
 
                 for punto in puntos:
                     tupla = (punto[0], punto[1])
                     resultados.append(tupla)
 
-            elif self.entry_list[point][3] is 2:
+            elif self.entry_list[point][2] is 2:
 
                 print("Es un proceso adiabatico")
 
-                puntos = graf.generar_puntos_adiabatica(float(self.entry_list[point][1].get()),
-                        float(self.entry_list[point-1][1].get()), float(self.entry_list[point][2].get()),
-                        float(self.entry_list[point-1][2].get()), False, 25)
+                puntos = graf.generar_puntos_adiabatica(float(self.entry_list[point][0].get()),
+                        float(self.entry_list[point-1][0].get()), float(self.entry_list[point][1].get()),
+                        float(self.entry_list[point-1][1].get()), False, 25)
 
                 for punto in puntos:
                     tupla = (punto[0], punto[1])
@@ -532,7 +526,7 @@ class Grafico(tk.Frame):
             else:
 
                 print("No es un proceso isotermico")
-                tupla = (float(self.entry_list[point][1].get()), float(self.entry_list[point][2].get()))
+                tupla = (float(self.entry_list[point][0].get()), float(self.entry_list[point][1].get()))
                 print("Tupla: " + str(tupla))
                 resultados.append(tupla)
         graf.generar_grafico(resultados)

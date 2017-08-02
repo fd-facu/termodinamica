@@ -69,7 +69,7 @@ print("Generande grafico")
 
 diferencia_volumen = volumen_final-volumen_inicial
 
-n_moles = (presion_inicial * volumen_inicial) / (temperatura_inicial * constantes.CONSTANTE_GASES_L_ATM)
+n_moles = (presion_inicial* volumen_inicial) / (temperatura_inicial * constantes.CONSTANTE_GASES_L_ATM)
 print("n_moles : " + str(n_moles))
 
 cantidad = 30
@@ -80,12 +80,12 @@ puntos.append((presion_inicial, volumen_inicial))
 for x in range(1, cantidad-1):
     volumen = volumen_inicial + (fraccion * x)
 
-    puntos.append((calc.obtener_presion_final(presion_inicial, volumen, volumen_inicial, delta), volumen))
+    puntos.append( (calc.obtener_presion_final(presion_inicial, volumen, volumen_inicial, delta), volumen))
 puntos.append((presion_final, volumen_final))
 
 puntos2 = graph.generar_puntos_adiabatica(presion_final, presion_inicial, volumen_final, volumen_inicial, False, 30)
 
-# graph.generar_grafico(puntos, "")
+#graph.generar_grafico(puntos, "")
 graph.generar_grafico(puntos2, "")
 print("Puntos de la curva adiabatica: " + str(puntos))
 print("Puntos de la curva adiabatica: " + str(puntos2))

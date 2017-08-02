@@ -7,9 +7,11 @@ plt.ylabel('Presion')
 plt.title('Grafico PV')
 
 
+
 def generar_grafico(lista_etapas, datos = None):
     instancia_presion = []
     instancia_volumen = []
+
 
     if datos is not None:
         plt.annotate(datos, (0, 0), (0, -20), xycoords='axes fraction', textcoords='offset points', va='top')
@@ -18,6 +20,7 @@ def generar_grafico(lista_etapas, datos = None):
 
         instancia_presion.append(tupla[0])
         instancia_volumen.append(tupla[1])
+
 
     print("Volumenes" + str(instancia_volumen))
     print("Presiones" + str(instancia_presion))
@@ -42,7 +45,6 @@ def generar_puntos_isoterma(n_moles, volumen_final, volumen_inicial, presion_fin
     print("Puntos de la isoterma: " + str(puntos))
 
     return puntos
-
 
 def generar_puntos_adiabatica(presion_final, presion_inicial, volumen_final, volumen_inicial, es_monoatomico, cantidad):
     print("Entro en generar puntos adiabatica.")
