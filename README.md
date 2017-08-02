@@ -3,6 +3,10 @@
 
 Aplicacion para resolver problemas de termodinamica. Fue un trabajo practico para la materia Fisica 3 de la Universidad Nacional de 3 de Febrero. (UNTREF)
 
+Descripcion:
+
+La aplicacion consiste en realizar calculos de termodinamica, Como obtener el trabajo realizado en un proceso Isotermico, o la variacion de calor. Tambien realiza graficos.
+
 Caracteristicas futuras:
 
 A corto plazo:
@@ -33,7 +37,7 @@ Graves:
 
 Instrucciones para ejecutar la aplicacion:
 
-  . Se requiere tener python instalado (Es recomendable usar ultima version), y tener instalada la libreria de python matplotlib.
+  . Se requiere tener python instalado (Es recomendable usar ultima version), y tener instalada la libreria de python matplotlib(para realizar los graficos).
 
   . Bajar el programa
   
