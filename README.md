@@ -1,14 +1,14 @@
 # termodinamica
 (Español)
 
-Aplicacion para resolver problemas de termodinamica. Fue un trabajo practico para la materia Fisica 3 de la Universidad 3 de Febrero. (UNTREF)
+Aplicacion para resolver problemas de termodinamica. Fue un trabajo practico para la materia Fisica 3 de la Universidad Nacional de 3 de Febrero. (UNTREF)
 
 Caracteristicas futuras:
 
 A corto plazo:
 
   . Implementar validaciones (ej: que no permita realizar el grafico si no se indico el numero de moles)
-  . Agregar conversiones
+  . Agregar conversiones de medidas.
   
 A largo plazo:
 
@@ -38,6 +38,12 @@ Instrucciones para ejecutar la aplicacion:
   . Bajar el programa
   
   . Ejecutar el archivo aplicacion.py
+
+Bibliografia:
+
+  Fisica para la ciencia y la tecnologia(Tipler-Mosca)
+  Fisica para ciencias e ingenieria(Serway)
+
 
 (English)
 
