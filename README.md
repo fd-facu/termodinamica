@@ -1,4 +1,4 @@
-# Aplicacion Termodinamica
+# Aplicacion Termodinamica (Release 0.3 beta)
 (Español)
 
 Aplicacion para resolver problemas de termodinamica. Fue un trabajo practico para la materia Fisica 3 de la Universidad Nacional de 3 de Febrero. (UNTREF)
@@ -22,6 +22,8 @@ A largo plazo:
 
   . Integrar el grafico en la ventana principal de la aplicacion.
   . Empaquetar la aplicacion y realizar instaladores para diferentes sistemas operativos
+
+Algunas de estas caracteristicas seran implementadas en la release 0.4
 
 
 ## Errores conocidos:
