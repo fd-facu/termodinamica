@@ -72,6 +72,6 @@ App that resolves thermodynamics problems.
 
 ## Bibliography:
 
-  Physics for students of scientists and engineers(Paul Tipler, Gene Mosca)
-  Physics for students of scientists and engineers(Raymond A. Serway)
+..* Physics for students of scientists and engineers(Paul Tipler, Gene Mosca)
+..* Physics for students of scientists and engineers(Raymond A. Serway)
   
