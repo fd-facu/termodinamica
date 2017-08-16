@@ -51,8 +51,8 @@ Graves:
 
 ## Bibliografia:
 
-  Fisica para la ciencia y la tecnologia(Tipler-Mosca)
-  Fisica para ciencias e ingenieria(Serway)
+  * Fisica para la ciencia y la tecnologia (Paul Tipler, Gene Mosca)
+  * Fisica para ciencias e ingenieria (Raymond A. Serway)
 
 
 (English)
@@ -72,6 +72,6 @@ App that resolves thermodynamics problems.
 
 ## Bibliography:
 
-  * Physics for students of scientists and engineers(Paul Tipler, Gene Mosca)
-  * Physics for students of scientists and engineers(Raymond A. Serway)
+  * Physics for students of scientists and engineers (Paul Tipler, Gene Mosca)
+  * Physics for students of scientists and engineers (Raymond A. Serway)
   
