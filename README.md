@@ -1,7 +1,7 @@
 # Aplicacion Termodinamica (Release 0.3 beta)
 (Español)
 
-Aplicacion para resolver problemas de termodinamica. Fue un trabajo practico para la materia Fisica 3 de la Universidad Nacional de 3 de Febrero. (UNTREF)
+Aplicacion para resolver problemas de termodinamica. Fue un trabajo practico para la materia Fisica 3 de la Universidad Nacional de 3 de Febrero (UNTREF)
 
 ## Descripcion:
 
@@ -34,7 +34,7 @@ Leves:
   
 Intermedios:
   
-  . El programa rompe cuando ingresamos valores no validos en los calculos. Se deben implementar validaciones  
+  . El programa rompe cuando se ingresan valores no validos en los calculos. Se deben implementar validaciones.  
 
 Graves:
 
@@ -63,8 +63,15 @@ App that resolves thermodynamics problems.
 
 ## Roadmap:
 
-.Implement some validations. 
-.Put the Plot window inside the app window.
+  .Implement some validations 
+  .Put the Plot window inside the app window
+
 
 
 ## Know Issues
+
+## Bibliography:
+
+  Physics for students of scientists and engineers(Paul Tipler, Gene Mosca)
+  Physics for students of scientists and engineers(Raymond A. Serway)
+  
