@@ -1,18 +1,8 @@
-# Ejemplo 18.1
-
 
 #import  grafico_temp_calor as graft
 import constantes as const
 import math
 # pag 521 tipler
-
-'''
-Notas:
-
-Temperatura esta en K
-calor especifico esta en kJ/kg * K
-
-'''
 
 
 # Devuelve el calor necesario para elevar la temperatura de una sustancia a una temp especifica
@@ -129,3 +119,4 @@ lista_fases = [(0, 253), (q1, 273), (q2, 273), (q3, 373), (q4, 373)]
 # print("Calor realizado total: " + str(qtotal))'''
 
 # graft.generar_grafico(lista_fases)
+
