@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import constantes
-import calculos as calc
+import calculations as calc
 
 plt.xlabel('Volumen')
 plt.ylabel('Presion')
@@ -21,7 +21,7 @@ def generar_grafico(lista_etapas, datos = None):
 
     print("Volumenes" + str(instancia_volumen))
     print("Presiones" + str(instancia_presion))
-    plt.plot(instancia_volumen, instancia_presion)
+    plt.plot(instancia_volumen, instancia_presion) # x, y
 
     plt.show()
 
