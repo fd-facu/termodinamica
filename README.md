@@ -59,19 +59,43 @@ Graves:
 
 # Thermodynamics App
 
-App that resolves thermodynamics problems.
+App that resolves thermodynamics problems. I made this App for a college work.
 
 ## Roadmap:
 
-  .Implement some validations 
-  .Put the Plot window inside the app window
+  . Implement some validations.
+  . Put the Plot window inside the app window.
+  . Make a little glosary with the most important thermodynamics functions and definitions.
 
 
 
 ## Know Issues
+
+
+Low:
+
+  . Syntax errors.
+  
+Medium:
+  
+  . The program breaks when putting invalid values on calculations. validations needed.  
+
+Graves:
+
+  . Botones desaparecen al presionar "graficar" repetidas veces en el menu de grafico.
+
 
 ## Bibliography:
 
   * Physics for students of scientists and engineers (Paul Tipler, Gene Mosca)
   * Physics for students of scientists and engineers (Raymond A. Serway)
   
+  
+ ## Instructions:
+
+  . The application requires python (latest version adviced), and install matplotlib python library in order to show the graphics.
+
+  . Download the zip with the apps files.
+  
+  . run application.py file.
+
