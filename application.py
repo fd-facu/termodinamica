@@ -94,18 +94,7 @@ class Application(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
-    def create_help_window(self):
-
-        # import the content of 'help.txt' text file
-        import_text = open('help.txt', 'r')
-        text = import_text.read()
-
-        help_window = tk.Toplevel(self)
-        # Keep the focus on the window.
-        help_window.grab_set()
-        help_window.wm_title("Help")
-        l = tk.Label(help_window, text=text)
-        l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
+    
 
     def go_to(self, event, href, tag_name):
         res = event.widget
@@ -136,13 +125,40 @@ class Application(tk.Tk):
         print("Language changed to " + language)
 
         if current_language is 'spanish':
+            self.menu.entryconfigure(1, label="Editar")
+            self.menu.entryconfigure(2, label="Ayuda")
             self.edit.entryconfigure(1, label="Idioma")
             self.help.entryconfigure(1, label="Ayuda")
             self.help.entryconfigure(2, label="Acerca de")
         else:
+            self.menu.entryconfigure(1, label="Edit")
+            self.menu.entryconfigure(2, label="Help")
             self.edit.entryconfigure(1, label="Language")
             self.help.entryconfigure(1, label="Docs")
             self.help.entryconfigure(2, label="About")
+
+
+    def create_help_window(self):
+
+        print("Loading help popup...")
+        help_window = tk.Toplevel(self)
+        help_window.grab_set()
+
+        if current_language is "spanish":
+            help_window.wm_title("Ayuda")
+            help_text = open("help_spanish.txt", "r")  
+        else:
+            help_window.wm_title("Help")
+            help_text = open("help.txt", "r")  
+
+        # Keep the focus on the window.
+
+        tx = tk.Text(help_window)
+        tx.insert(0.1, help_text.read())
+
+        
+        tx.config(state='disabled')
+        tx.pack(side="bottom", padx=20, anchor='w')
 
     def create_about_popup(self):
 
@@ -294,7 +310,7 @@ class LatentHeatCalculation(tk.Frame):
                             command=lambda: self.get_latent_heat(mass_entry.get(), latent_heat_entry.get()))
 
         self.result_label = tk.Label(self, text="", fg="blue")
-        return_button = tk.Button(self, text="Back", command=lambda: controller.show_frame("MainMenu"))
+        return_button = tk.Button(self, text="Back", command=lambda: controller.show_frame("OperationsMenu"))
 
         title_label.pack(side="top", fill="x", pady=10)
         mass_label.pack()
@@ -331,7 +347,7 @@ class TemperatureCalculation(tk.Frame):
                             command=lambda: self.obtener_temperatura(entrada_moles.get(), entrada_presion.get(), entrada_volumen.get()))
 
         self.texto_resultado = tk.Label(self, text="", fg="blue")
-        return_button = tk.Button(self, text="Volver", command=lambda: controller.show_frame("MainMenu"))
+        return_button = tk.Button(self, text="Volver", command=lambda: controller.show_frame("OperationsMenu"))
 
         label.pack(side="top", fill="x", pady=10)
         texto_moles.pack()
@@ -379,7 +395,7 @@ class ConstantPressureWorkCalculation(tk.Frame):
                 entrada_volumen_inicial.get()))
 
         return_button = tk.Button(self, text="Back",
-                                  command=lambda: controller.show_frame("MainMenu"))
+                                  command=lambda: controller.show_frame("OperationsMenu"))
 
         texto_presion.pack()
         entrada_presion.pack()
@@ -422,7 +438,7 @@ class ConstantTemperatureWorkCalculation(tk.Frame):
                 initial_volume_entry.get()))
 
         return_button = tk.Button(self, text="Volver",
-                                  command=lambda: controller.show_frame("MainMenu"))
+                                  command=lambda: controller.show_frame("OperationsMenu"))
 
         title_label.pack(side="top", fill="x", pady=10)
         moles_label.pack()
@@ -529,15 +545,15 @@ class Graphic(tk.Frame):
         entrada_volumen2 = tk.Entry(self)
 
         self.var_1 = tk.IntVar()
-        self.var_1.set(0)
+        self.var_1.set(1)
         var_1_int = self.var_1.get()
 
         self.entry_list = [[pressure_entry, volume_entry, var_0_int], [entrada_presion2, entrada_volumen2, var_1_int]]
         self.answer_list = [var_0, self.var_1]
-        print("valor del entry list: " + str(self.entry_list[1][2]))
+        #print("valor del entry list: " + str(self.entry_list[1][2]))
 
         process_label = tk.Label(self, text=" Process type")
-        isothermal_radius = tk.Radiobutton(self, text="Isothermal", command= lambda : self.change(1, 1))
+        isothermal_radius = tk.Radiobutton(self, text="Isothermal",  command= lambda : self.change(1, 1))
         non_isothermal_radius = tk.Radiobutton(self, text="Constant Volume/Pressure", command= lambda : self.change(1, 0))
         adiabatic_radius = tk.Radiobutton(self, text="Adiabatic", command=lambda: self.change(1, 2))
 
@@ -734,13 +750,12 @@ class HeatGraphic(tk.Frame):
 
     def result(self):
         # graf2.generate_points(60, float(self.mass_entry.get()), )
-        file = open('heat_data.json', 'r')
-        file_string = file.read()
-        file_json = json.loads(file_string)
-        print('Pending')
-        print(file_json['water']['fusion point'])
-
-
+        #file = open('heat_data.json', 'w')
+        #file_string = file.write()
+        #file_json = json.loads(file_string)
+        #print('Pending')
+        #print(file_json['water']['fusion point'])
+        print("dos")
 if __name__ == "__main__":
     print("Starting application...\n")
     app = Application()
