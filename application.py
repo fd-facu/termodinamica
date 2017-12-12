@@ -94,18 +94,7 @@ class Application(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
-    def create_help_window(self):
-
-        # import the content of 'help.txt' text file
-        import_text = open('help.txt', 'r')
-        text = import_text.read()
-
-        help_window = tk.Toplevel(self)
-        # Keep the focus on the window.
-        help_window.grab_set()
-        help_window.wm_title("Help")
-        l = tk.Label(help_window, text=text)
-        l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
+    
 
     def go_to(self, event, href, tag_name):
         res = event.widget
@@ -147,6 +136,29 @@ class Application(tk.Tk):
             self.edit.entryconfigure(1, label="Language")
             self.help.entryconfigure(1, label="Docs")
             self.help.entryconfigure(2, label="About")
+
+
+    def create_help_window(self):
+
+        print("Loading help popup...")
+        help_window = tk.Toplevel(self)
+        help_window.grab_set()
+
+        if current_language is "spanish":
+            help_window.wm_title("Ayuda")
+            help_text = open("help_spanish.txt", "r")  
+        else:
+            help_window.wm_title("Help")
+            help_text = open("help.txt", "r")  
+
+        # Keep the focus on the window.
+
+        tx = tk.Text(help_window)
+        tx.insert(0.1, help_text.read())
+
+        
+        tx.config(state='disabled')
+        tx.pack(side="bottom", padx=20, anchor='w')
 
     def create_about_popup(self):
 
