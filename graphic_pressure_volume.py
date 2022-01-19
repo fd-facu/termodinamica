@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import constantes
+import constants as consts
 import calculations as calc
 
 plt.xlabel('Volumen')
@@ -26,22 +26,22 @@ def generar_grafico(lista_etapas, datos = None):
     plt.show()
 
 
-# Crea puntos para repesentar la curva de un proceso isotermico
-def generar_puntos_isoterma(n_moles, volumen_final, volumen_inicial, presion_final, presion_inicial, cantidad, temperatura):
+# Create points to repesent an isometric process curve
+def generar_puntos_isoterma(n_moles, final_volume, initial_volume, final_pressure, initial_pressure, quantity, temperature):
     print("Entro en generar puntos isoterma.")
-    fraccion = (volumen_final - volumen_inicial) / cantidad
-    print("Fraccion: " + str(fraccion))
-    puntos = []
-    puntos.append((presion_inicial, volumen_inicial))
-    for x in range(1, cantidad-1):
-        volumen = volumen_inicial + fraccion * x
+    fraction = (final_volume - initial_volume) / quantity
+    print("Fraction: " + str(fraction))
+    points = []
+    points.append((initial_pressure, initial_volume))
+    for x in range(1, quantity-1):
+        volume = initial_volume + fraction * x
 
-        puntos.append( (n_moles * constantes.CONSTANTE_UNIVERSAL_GASES * temperatura / (volumen) ,volumen))
-    puntos.append((presion_final, volumen_final))
+        points.append( (n_moles * consts.IDEAL_GAS_CONSTANT_L_ATM * temperature / (volume) ,volume))
+    points.append((final_pressure, final_volume))
 
-    print("Puntos de la isoterma: " + str(puntos))
+    print("Isometric process points: " + str(points))
 
-    return puntos
+    return points
 
 
 def generar_puntos_adiabatica(presion_final, presion_inicial, volumen_final, volumen_inicial, es_monoatomico, cantidad):
@@ -67,7 +67,3 @@ def generar_puntos_adiabatica(presion_final, presion_inicial, volumen_final, vol
     return puntos
 
 
-# test
-# x= volumen y = presion
-# test_etapas = [(1, 2), (2.5, 2), (2.5, 1), (1, 1), (1, 2)]
-# generar_grafico(test_etapas)

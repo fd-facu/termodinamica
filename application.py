@@ -20,7 +20,7 @@ import graphic_pressure_volume as graf
 import grafico_temp_calor as graf2
 
 
-# Each page is represented by  a class
+# Each page is represented by  a  python class.
 
 
 # Global variables

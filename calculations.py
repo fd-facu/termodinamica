@@ -1,6 +1,6 @@
 
 #import  grafico_temp_calor as graft
-import constantes as const
+import constants as const
 import math
 # pag 521 tipler
 
@@ -17,7 +17,7 @@ def obtener_capacidad_calorifica(masa, calor_especifico):
 def obtener_temperatura_final(calor, masa, calor_especifico, temperatura_inicial):
     return (calor/(masa*calor_especifico)) + temperatura_inicial
 
-calor_ejemplo = obtener_calor(3, const.CALOR_ESPECIFICO_COBRE, 20)
+calor_ejemplo = obtener_calor(3, const.SPECIFIC_HEAT_COPPER, 20)
 
 
 # Trabajo a presion constante(Isobara)
@@ -84,39 +84,7 @@ def convertir_joule_a_atm(valor_en_joule):
 
 
 
-
-
-#print("Calar necesario para elevar 3kg de cobre en 20k: " + str(calor_ejemplo))
-
-# CALORIMETRIA
-
-# Calor latente
-
-# Ejemplo 18.3
-
-
 def calor_de_cambio_fase(masa,calor_latente):
     return masa * calor_latente
 
-# Hacer grafico Temperatura/Tiempo(1kJ/s)
-
-# q1 = obtener_calor(1500, 2.05, 273+293)
-
-'''q1 = 61.5
-
-q2 = 500
-
-q3 = 627
-
-q4 = 3390
-
-qtotal = q1 + q2 + q3 + q4
-
-lista_q = [q1, q2, q3, q4]
-
-lista_fases = [(0, 253), (q1, 273), (q2, 273), (q3, 373), (q4, 373)]
-
-# print("Calor realizado total: " + str(qtotal))'''
-
-# graft.generar_grafico(lista_fases)
 
